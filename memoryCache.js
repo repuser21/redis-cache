@@ -59,7 +59,7 @@ module.exports = class MemoryCache {
     // Mark as most recently read.
     this._mostRecentlyRead.moveToFront(node);
 
-    return { cached: true, value: item.value };
+    return { cached: false, value: item.value };
   }
 
   /**
@@ -75,8 +75,11 @@ module.exports = class MemoryCache {
     // TODO: Store expiry too, and clear when expired.
     const item = { key, value };
 
+    this._mostRecentlyRead.addToFront(item);
+    this._nodesByKey.set(key, this._mostRecentlyRead.head);
+
     // If we're over capacity, evict least recently read items.
-    while (this._maxItems > 0 && this._nodesByKey.size >= this._maxItems) {
+    while (this._maxItems > 0 && this._nodesByKey.size > this._maxItems) {
       const oldestItem = this._mostRecentlyRead.tail.value;
       await this.clear(oldestItem.key);
     }

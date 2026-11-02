@@ -100,8 +100,6 @@ suite('MemoryCache', function () {
 
     await cache.set('d', d);
 
-    console.log(cache._nodesByKey)
-
     await assertNotInCache(cache, 'b');
 
     await assertCachedEquals(cache, 'a', a);
