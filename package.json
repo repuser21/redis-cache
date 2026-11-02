@@ -1,0 +1,20 @@
+{
+    "name": "onecache",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "test": "cross-env NODE_OPTIONS=--unhandled-rejections=strict mocha *_test.js --ui tdd --exit"
+    },
+    "dependencies": {
+        "cross-env": "^7.0.3",
+        "yallist": "^4.0.0"
+    },
+    "devDependencies": {
+        "mocha": "^7.1.0"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "all"
+    }
+}
